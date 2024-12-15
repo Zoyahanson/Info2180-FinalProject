@@ -6,8 +6,8 @@ CREATE TABLE IF NOT EXISTS Users (
     firstname VARCHAR(255),
     lastname VARCHAR(255),
     password VARCHAR(255),
-    email VARCHAR(255),
-    role VARCHAR(50),
+    email VARCHAR(255) UNIQUE,
+    role ENUM('Admin', 'Member'),
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS Contacts (
     title VARCHAR(255), 
     firstname VARCHAR(255),
     lastname VARCHAR(255),
-    email VARCHAR(255),
+    email VARCHAR(255) UNIQUE,
     telephone VARCHAR(20),
     company VARCHAR(255),
     type VARCHAR(50),
@@ -37,3 +37,5 @@ CREATE TABLE IF NOT EXISTS Notes (
     FOREIGN KEY (contact_id) REFERENCES Contacts(id),
     FOREIGN KEY (created_by) REFERENCES Users(id)
 );
+
+INSERT INTO Users (email, password) VALUES ('admin@project2.com', SHA2('password123', 256));
